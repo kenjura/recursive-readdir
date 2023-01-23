@@ -69,6 +69,8 @@ function readdir(path, ignores, callback) {
           return null;
         }
 
+        list.push(filePath);
+        
         if (stats.isDirectory()) {
           readdir(filePath, ignores, function(__err, res) {
             if (__err) {
@@ -82,7 +84,6 @@ function readdir(path, ignores, callback) {
             }
           });
         } else {
-          list.push(filePath);
           pending -= 1;
           if (!pending) {
             return callback(null, list);
